@@ -1,27 +1,39 @@
-export const animals = [
+type Animal = {
+  id: number;
+  name?: string | null;
+  color?: "black" | "gray" | "white" | "brown" | "orange" | "pink";
+};
+
+export const animals: Animal[] = [
   {
     id: 1,
     name: "Antelope",
+    color: "orange",
   },
   {
     id: 2,
     name: "Bear",
+    color: "brown",
   },
   {
     id: 3,
     name: "Cat",
+    color: "orange",
   },
   {
     id: 4,
     name: "Dog",
+    color: "white",
   },
   {
     id: 5,
     name: "Elephant",
+    color: "gray",
   },
   {
     id: 6,
     name: "Flamingo",
+    color: "pink",
   },
   {
     id: 7,
