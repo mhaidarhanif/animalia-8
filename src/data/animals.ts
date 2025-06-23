@@ -4,7 +4,7 @@ type Animal = {
   color?: "black" | "gray" | "white" | "brown" | "orange" | "pink";
 };
 
-export const animals: Animal[] = [
+export const dataAnimals: Animal[] = [
   {
     id: 1,
     name: "Antelope",

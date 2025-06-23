@@ -1,5 +1,7 @@
 import { Hono } from "hono";
-import { animals } from "./data/animals";
+import { dataAnimals } from "./data/animals";
+
+let animals = dataAnimals;
 
 const app = new Hono();
 
@@ -28,17 +30,16 @@ app.post("/animals", async (c) => {
 
   const nextId = animals[animals.length - 1].id + 1 || 1;
 
-  const updatedAnimals = [
-    ...animals,
-    {
-      id: nextId,
-      ...body,
-    },
-  ];
+  const newAnimal = {
+    id: nextId,
+    ...body,
+  };
 
-  console.log(updatedAnimals);
+  const updatedAnimals = [...animals, newAnimal];
 
-  return c.json(body);
+  animals = updatedAnimals;
+
+  return c.json(newAnimal);
 });
 
 export default app;
