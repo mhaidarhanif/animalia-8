@@ -1,6 +1,6 @@
 type Animal = {
   id: number;
-  name?: string | null;
+  name: string;
   color?: "black" | "gray" | "white" | "brown" | "orange" | "pink";
 };
 

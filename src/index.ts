@@ -23,4 +23,22 @@ app.get("/animals/:id", (c) => {
   return c.json(animal);
 });
 
+app.post("/animals", async (c) => {
+  const body = await c.req.json();
+
+  const nextId = animals[animals.length - 1].id + 1 || 1;
+
+  const updatedAnimals = [
+    ...animals,
+    {
+      id: nextId,
+      ...body,
+    },
+  ];
+
+  console.log(updatedAnimals);
+
+  return c.json(body);
+});
+
 export default app;
