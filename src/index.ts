@@ -1,5 +1,8 @@
 import { Hono } from "hono";
+
 import { dataAnimals } from "./data/animals";
+
+console.log(process.env);
 
 let animals = dataAnimals;
 
