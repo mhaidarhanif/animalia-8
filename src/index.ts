@@ -1,8 +1,10 @@
 import { Hono } from "hono";
 
+import { PrismaClient } from "./generated/prisma";
+
 import { dataAnimals } from "./data/animals";
 
-console.log(process.env);
+const prisma = new PrismaClient();
 
 let animals = dataAnimals;
 
@@ -15,8 +17,10 @@ app.get("/", (c) => {
   });
 });
 
-app.get("/animals", (c) => {
-  return c.json(animals);
+app.get("/animals", async (c) => {
+  const allAnimals = await prisma.animal.findMany();
+
+  return c.json(allAnimals);
 });
 
 app.get("/animals/:id", (c) => {
