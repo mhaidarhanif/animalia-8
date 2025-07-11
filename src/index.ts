@@ -23,10 +23,13 @@ app.get("/animals", async (c) => {
   return c.json(allAnimals);
 });
 
-app.get("/animals/:id", (c) => {
+app.get("/animals/:id", async (c) => {
   const id = Number(c.req.param("id"));
 
-  const animal = animals.find((animal) => animal.id === id);
+  const animal = await prisma.animal.findUnique({
+    where: { id },
+  });
+
   if (!animal) return c.notFound();
 
   return c.json(animal);
@@ -35,18 +38,14 @@ app.get("/animals/:id", (c) => {
 app.post("/animals", async (c) => {
   const body = await c.req.json();
 
-  const nextId = animals[animals.length - 1].id + 1 || 1;
+  const animal = await prisma.animal.create({
+    data: {
+      name: body.name,
+      color: body.color,
+    },
+  });
 
-  const newAnimal = {
-    id: nextId,
-    ...body,
-  };
-
-  const updatedAnimals = [...animals, newAnimal];
-
-  animals = updatedAnimals;
-
-  return c.json(newAnimal);
+  return c.json(animal);
 });
 
 export default app;
