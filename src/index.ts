@@ -2,11 +2,7 @@ import { Hono } from "hono";
 
 import { PrismaClient } from "./generated/prisma";
 
-import { dataAnimals } from "./data/animals";
-
 const prisma = new PrismaClient();
-
-let animals = dataAnimals;
 
 const app = new Hono();
 
