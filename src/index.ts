@@ -9,7 +9,8 @@ const app = new Hono();
 app.get("/", (c) => {
   return c.json({
     ok: true,
-    message: "Hello!",
+    message: "Animalia 8",
+    animals: "/animals",
   });
 });
 
