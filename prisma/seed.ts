@@ -1,18 +1,25 @@
 import { PrismaClient } from "../src/generated/prisma";
+import { createSlug } from "../src/lib/slug";
+
+import { dataSeedAnimals } from "./data/animals";
 
 const prisma = new PrismaClient();
 
 async function main() {
-  const animalBear = await prisma.animal.upsert({
-    where: { slug: "polar-bear" },
-    update: {},
-    create: {
-      name: "Polar Bear",
-      slug: "polar-bear",
-      color: "white",
-    },
-  });
-  console.log({ animalBear });
+  for (const seedAnimal of dataSeedAnimals) {
+    const slug = createSlug(seedAnimal.name);
+
+    const animal = await prisma.animal.upsert({
+      where: { slug },
+      update: {},
+      create: {
+        slug,
+        ...seedAnimal,
+      },
+    });
+
+    console.log(`🐻 Animal: ${animal.name} (${animal.slug})`);
+  }
 }
 
 main()
