@@ -11,6 +11,7 @@ datasource db {
 model Animal {
   id Int @id @default(autoincrement())
 
-  name  String
-  color String?
+  name  String // Polar Bear
+  slug  String  @unique // polar-bear
+  color String? // white
 }
